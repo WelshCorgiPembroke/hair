@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: master
+
+---
+# master节点
+spring:
+  profiles: master
+  application:
+    name: microservice-discovery-server-master
+server:
+  port: 8000
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+---
+# slaver节点
+spring:
+  profiles: slave
+  application:
+    name: microservice-discovery-server-slave
+server:
+  port: 8001
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+    register-with-eureka: true
+    fetch-registry: true
